@@ -1,0 +1,42 @@
+//
+//  main.cpp
+//  reversesentence
+//  Google CodeJam
+//  Created by Jeet Singh on 3/10/16.
+//  Copyright © 2016 Jeet Singh. All rights reserved.
+//
+
+void reversesentence(string sentence){
+    int length = 0;
+    
+    for (int i = 0; sentence[i] != '\n'; i++) {
+        length++;
+    }
+    char reverse[length];
+    int p = 0;
+    
+    for (int j = length - 1; j >= 0; j--) {
+        reverse[p] = sentence[j];
+        p++;
+    }
+    int words = 0;
+    char str[length];
+    
+       for (int l = 0, last_l = 0; ; l++) {
+        if (reverse[l] == ' ' || reverse[l] == '\n')
+        {
+            for (int m = l - 1; m >= last_l; m--) {
+                str[words] = reverse[m];
+                words++;
+            }
+            last_l = l + 1;
+            str[words] = reverse[l];
+            words++;
+        }
+        if (reverse[l] == '\0')
+            break;
+    }
+    
+    cout << str << endl;
+
+}
