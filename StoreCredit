@@ -1,0 +1,17 @@
+
+void findtwoitems(int C, int items[], int size ){
+    bool test[C];
+    int testitem, difference;
+    int i=0;
+    while(i<size){
+        testitem=items[i];
+        difference = C-testitem;
+        if (test[difference]==true){
+            cout<<"The items are "<<testitem<<" and "<<difference<<endl;
+
+    }
+        else test[testitem]=true;
+        i++;
+}
+}
+
