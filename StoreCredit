@@ -1,5 +1,39 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
 
-void findtwoitems(int C, int items[], int size ){
+using namspace std;
+
+void findtwoitems (int, vector<int>, int);
+
+int main(){
+  ifstream infile;
+    if(!infile) {
+        cout << "could not open " << infile <<std::endl;
+        exit(EXIT_FAILURE);
+    }
+    ofstream outfile;
+    if(!outfile) {
+    cout << "could not open " <<outfile << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    int num_cases, i=0, n_items, credit;
+    infile >> num_cases;
+    while(i < num_cases){
+        infile >> credit;
+        infile >> n_items;
+        int price;
+        vector<int> prices;
+        for(int j=0; j<n_items; j++){
+            infile >> price;
+            prices.push_back(price);
+        }
+        int item1 = credeit_pos(prices, n_items, credit);
+        outfile <<"Case #"<< i+1 <<": " << item1 <<" "<< credit-item1 << std::endl;
+        i++;
+    }
+int findtwoitems(int C, vector<int> prices, int size ){
     bool test[C];
     int testitem, difference;
     int i=0;
@@ -8,10 +42,12 @@ void findtwoitems(int C, int items[], int size ){
         difference = C-testitem;
         if (test[difference]==true){
             cout<<"The items are "<<testitem<<" and "<<difference<<endl;
+            return testitem;
 
     }
         else test[testitem]=true;
         i++;
 }
+return 0;
 }
 
