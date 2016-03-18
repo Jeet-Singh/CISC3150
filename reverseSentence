@@ -1,42 +1,46 @@
-//
-//  main.cpp
-//  reversesentence
-//  Google CodeJam
-//  Created by Jeet Singh on 3/10/16.
-//  Copyright © 2016 Jeet Singh. All rights reserved.
-//
+#include <iostream>
+#include <sstream>
+#include <vector>
+#include <string>
+#include <fstream>
 
-void reversesentence(string sentence){
-    int length = 0;
-    
-    for (int i = 0; sentence[i] != '\n'; i++) {
-        length++;
-    }
-    char reverse[length];
-    int p = 0;
-    
-    for (int j = length - 1; j >= 0; j--) {
-        reverse[p] = sentence[j];
-        p++;
-    }
-    int words = 0;
-    char str[length];
-    
-       for (int l = 0, last_l = 0; ; l++) {
-        if (reverse[l] == ' ' || reverse[l] == '\n')
-        {
-            for (int m = l - 1; m >= last_l; m--) {
-                str[words] = reverse[m];
-                words++;
-            }
-            last_l = l + 1;
-            str[words] = reverse[l];
-            words++;
-        }
-        if (reverse[l] == '\0')
-            break;
-    }
-    
-    cout << str << endl;
+std::string rvrs_ln(const std::string& line);
 
+int main(){
+   std::ifstream infile("B-small-practice.in");
+   std::ofstream oufile("B-small-practice-result.out");
+   if(!infile)
+    std::cout<<"Could not open input file"<<std::endl;
+   if(!oufile)
+    std::cout<<"Could ont open output file"<<std::endl;
+
+   int x = 1;       //index for formatting output file
+   std::string line;
+   int test_cases;
+   infile>>test_cases;      //this is never used
+   getline(infile,line);    //discards first line
+
+   for(; std::getline(infile,line); x++){
+       std::string all = rvrs_ln(line);
+       oufile<<"Case #"<<x<<": "<<all<<std::endl;
+   }
+   infile.close();
+   oufile.close();
+}
+
+std::string rvrs_ln(const std::string& line){
+    std::istringstream buffer(line);
+    std::string wrd,rvrs;
+    std::vector<std::string> hold;
+    int count_wrd = 0;
+
+    while(buffer>>wrd){
+        hold.push_back(wrd);
+        count_wrd++;
+    }
+    for(int i=count_wrd-1; i>=0; --i){
+        rvrs += hold[i];
+        rvrs += " ";
+    }
+    return rvrs;
 }
